@@ -1,3 +1,3 @@
-module github.com/mockbit/wisp
+module github.com/magnta/wisp
 
 go 1.17
