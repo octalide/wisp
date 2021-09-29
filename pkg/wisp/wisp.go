@@ -81,7 +81,7 @@ func Running() bool {
 	return running
 }
 
-func AddEvent(event *Event) {
+func Broadcast(event *Event) {
 	addEvent <- event
 }
 
