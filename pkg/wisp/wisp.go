@@ -1,5 +1,7 @@
 package wisp
 
+import "time"
+
 var (
 	running bool
 	stop    chan struct{}
@@ -12,6 +14,8 @@ var (
 )
 
 func broadcast(event *Event, handlers []*Handler) {
+	event.Time = time.Now()
+
 	for _, hand := range handlers {
 		// skip handlers with nil callbacks to avoid errors
 		if hand.Callback == nil {
