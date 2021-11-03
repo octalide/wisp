@@ -67,6 +67,7 @@ func run() {
 	}
 }
 
+// Init initializes the event loop. Will not initialize twice.
 func Init() {
 	if !running {
 		handlers = []*Handler{}
@@ -80,26 +81,37 @@ func Init() {
 	}
 }
 
+// Stop stops the event loop
 func Stop() {
 	stop <- struct{}{}
 }
 
+// Running returns true if the event loop is running
 func Running() bool {
 	return running
 }
 
+// Broadcast creates and broadcasts an event
 func Broadcast(event *Event) {
 	addEvent <- event
 }
 
+// Emit creates and broadcasts an event
+func Emit(tag string, data interface{}) {
+	Broadcast(&Event{Tag: tag, Data: data})
+}
+
+// AddHandler adds a handler to the event loop
 func AddHandler(handler *Handler) {
 	addHandler <- handler
 }
 
+// DelHandler removes a handler from the event loop
 func DelHandler(handler *Handler) {
 	delHandler <- handler
 }
 
+// Handlers returns a list of all handlers
 func Handlers() []*Handler {
 	return handlers
 }
