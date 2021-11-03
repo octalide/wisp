@@ -89,8 +89,8 @@ func TestAddHandler(t *testing.T) {
 			name: "add handler",
 			args: args{
 				handler: &Handler{
-					Callback: func(data interface{}) bool {
-						fmt.Println("data (A):", data)
+					Callback: func(e *Event) bool {
+						fmt.Println("data (A):", e.Data)
 						return true
 					},
 					Tags:     []string{"testa"},

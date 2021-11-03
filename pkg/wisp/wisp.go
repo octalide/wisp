@@ -29,13 +29,13 @@ func broadcast(event *Event, handlers []*Handler) {
 			// find matching handler tags
 			if strings.HasPrefix(event.Tag, tag) {
 				if hand.Blocking {
-					if hand.Callback(event.Data) {
+					if hand.Callback(event) {
 						return
 					}
 				} else {
 					// note that a handler CANNOT consume the event if it is
 					// non-blocking
-					go hand.Callback(event.Data)
+					go hand.Callback(event)
 				}
 			}
 		}
