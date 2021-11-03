@@ -1,6 +1,9 @@
 package wisp
 
-import "time"
+import (
+	"strings"
+	"time"
+)
 
 var (
 	running bool
@@ -24,7 +27,7 @@ func broadcast(event *Event, handlers []*Handler) {
 
 		for _, tag := range hand.Tags {
 			// find matching handler tags
-			if event.Tag == tag {
+			if strings.HasPrefix(event.Tag, tag) {
 				if hand.Blocking {
 					if hand.Callback(event.Data) {
 						return
